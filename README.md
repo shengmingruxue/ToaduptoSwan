@@ -3,8 +3,8 @@
 Work hard every day and become a big cow in the morning and evening.
 **********************************************************************************************************************
 
-lstmword2vec.py主要是用gensim训练word2vec，然后使用keras的lstm模型对评论数据进行情感分析
-svmword2vec.py主要是用gensim训练word2vec，然后使用sklearn的svm模型对评论数据进行情感分析
+lstm_word2vec.py主要是用gensim训练word2vec，然后使用keras的lstm模型对评论数据进行情感分析
+svm_word2vec.py主要是用gensim训练word2vec，然后使用sklearn的svm模型对评论数据进行情感分析
 将传统与神经网络模型进行对比，代码大部分非我自己所写，出自https://github.com/BUPTLdy/Sentiment-Analysis这位大神之手，我只是进行了小部分修改，例如添加了去停用词的部分。
 在理解代码的过程中发现了一些比较好的博文：
 https://buptldy.github.io/2016/07/20/2016-07-20-sentiment%20analysis/

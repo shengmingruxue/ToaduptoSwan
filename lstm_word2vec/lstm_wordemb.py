@@ -47,7 +47,7 @@ def doc2num(s, maxlen, word_set, abc):
 # save the word dictionary
 def savewordDictionary(abc):
     try:
-        f_open = open('/data/liuhua/code/kerasTest/data/dictionary.txt', 'w')
+        f_open = open('/data/dictionary.txt', 'w')
         for item in abc.index:
             f_open.write(item + "\t" + str(abc[item]) + "\n")
         f_open.close()
@@ -57,7 +57,7 @@ def savewordDictionary(abc):
 
 # read the word dictionary for prediction
 def readwordDictionary():
-    f_open = open('/data/liuhua/code/kerasTest/data/dictionary.txt', 'r')
+    f_open = open('/data/dictionary.txt', 'r')
     word_dict = {}
     for line in f_open:
         try:
@@ -80,9 +80,9 @@ def readwordDictionary():
 def loaddata():
     print("loading data...")
     # set up the label
-    pos = pd.read_excel('/data/liuhua/code/kerasTest/data/pos.xls', header=None)
+    pos = pd.read_excel('/data/pos.xls', header=None)
     pos['label'] = 1
-    neg = pd.read_excel('/data/liuhua/code/kerasTest/data/neg.xls', header=None)
+    neg = pd.read_excel('/data/neg.xls', header=None)
     neg['label'] = 0
     # merge the positive data and the negative data
     all_ = pos.append(neg, ignore_index=True)
@@ -143,19 +143,19 @@ def trainmodel(x, y, input_dim):
     print(score)
     # save the trained lstm model
     yaml_string = model.to_yaml()
-    with open('/data/liuhua/code/kerasTest/data/lstm_emb.yml', 'w') as outfile:
+    with open('/data/lstm_emb.yml', 'w') as outfile:
         outfile.write(yaml.dump(yaml_string, default_flow_style=True))
-    model.save_weights('/data/liuhua/code/kerasTest/data/lstm_emb.h5')
+    model.save_weights('/data/lstm_emb.h5')
 
 
 def predict_one(s):  # 单个句子的预测函数
     print('loading model......')
-    with open('/data/liuhua/code/kerasTest/data/lstm_emb.yml', 'r') as f:
+    with open('/data/lstm_emb.yml', 'r') as f:
         yaml_string = yaml.load(f)
     model = model_from_yaml(yaml_string)
 
     print('loading weights......')
-    model.load_weights('/data/liuhua/code/kerasTest/data/lstm_emb.h5')
+    model.load_weights('/data/lstm_emb.h5')
     model.compile(loss='binary_crossentropy',
                   optimizer='adam',
                   metrics=['accuracy'])
